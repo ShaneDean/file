@@ -1,0 +1,171 @@
+# 前言
+整理下虚拟机相关的操作业务代码
+
+# entity
+
+-   Vm
+    -   VmStatic
+        -    name
+        -    ArrayList<DiskImage> images
+        -    List<VmNetworkInterface> interfaces
+        -    ArrayList<DiskImage> diskList
+        -    Map<Guid, VmDevice> managedDeviceMap
+        -    List<VmDevice> unmanagedDeviceList
+        -    Guid id
+        -    Guid clusterId
+        -    vmGroupId
+        -    osId
+        -    VmType vmType
+        -    description
+        -    stateless
+        -    runAdnPause
+        -    deleteProtected
+        -    OriginType origin
+        -    VmInit
+            -    Guid id
+            -    hostname
+            -    timezone
+            -    authorizedKeys
+            -    regenerateKeys
+            -    activeDirectoryOU
+            -    orgName
+            -    dnsServers
+            -    dnsSearch
+            -    List<VminitNetwork> networks
+            -    winkey
+            -    userName
+            -    rootPasswork
+            -    passwordAlreadyStored
+            -    customScript
+            -    inputLocale
+            -    uiLanguage
+            -    systemLocale
+            -    userLocale
+        -    DisplayType defaultDisplayType
+        -    vncKeyboardLayout
+        -    UsbPolicy
+        -    ConsoleDisconnectAction    consoleDisconnectAction
+        -    numOfMonitors
+        -    singleQxlPci
+        -    smartcardEnabled
+        -    SsoMethod ssoMethod
+        -    spiceFileTransferEnabled
+        -    spiceCopyPasteEnabled
+        -    List<guid> dedicatedVmForVdsList
+        -    MigrationSupport   migrationSupport
+        -    Guid migrationPolicyId
+        -    migrationDowntime
+        -    autoConverge
+        -    migrateCompressed
+        -    List<VmNumaNode> vNumaNodeList
+        -    NumaTuneMode numaTuneMode
+        -    priority
+        -    cpuProfileId
+        -    cpuShares
+        -    minAllocatedMem
+        -    defaultBootSequence
+        -    bootMenuEnabled
+        -    customProperties
+        -    createdByUserId
+        -    creationDate
+        -    Map<Guid, VmDevice> managedDeviceMap
+        -    List<VmDevice> unmanagedDeviceList
+        -    failBack
+        -    niceLevel
+        -    dbGeneration
+        -    isoPath
+        -    kernelUrl
+        -    kernelParams
+        -    initrdUrl
+        -    allowConsoleReconnect
+        -    ovfVersion
+        -    exportDate
+        -    userDefinedProperties
+        -    predefinedProperties
+        -    tunnelMigration
+        -    quotaId
+        -    quotaName
+        -    quotaDefault
+        -    quotaEnforcementType
+        -    vmGroupName
+        -    Guid templateId
+        -    initialized
+        -    originalTemplateName
+        -    originalTemplateGuid
+        -    cpuPinning
+        -    useHostCpuFlags
+        -    useLatestVersion
+    -   VmDynamic
+        -   Guid id
+        -   VMStatus status
+        -   vmIp
+        -   vmFQDN
+        -   vmHost
+        -   lastStartTime
+        -   lastStopTime
+        -   sessionTime
+        -   dateTime
+        -   osTime
+        -   guestCurUserName
+        -   consoleCurrentName
+        -   consoleUserId
+        -   guestOs
+        -   Guid migratingToVds
+        -   Guid runOnVds
+        -   String appList
+        -   acpiEnabled
+        -   vncKeyboardLayout
+        -   utcDiff
+        -   cliientIp
+        -   guestRequestedMemory
+        -   BootSequence bootSequence
+        -   VmExitStatus exitStatus
+        -   VmPauseStatus pauseStatus
+        -   guestAgentNicsHash
+        -   exitMessage
+        -   lastWatchdogEvent
+        -   lastWatchdogAction
+        -   runOnce
+        -   volatileRun
+        -   cpuName
+        -   GuestAgentStatus ovirtGuestAgentStatus
+        -   GuestAgentStatus qemuGuestAgentStatus
+        -   emulatedMachine
+        -   currentCd
+        -   VmExitReason exitReason
+        -   guestCpuCount
+        -   Map<GraphicsType, GraphicsInfo> graphicsInfos
+        -   guestOsVersion
+        -   guestOsDistribution
+        -   guestOsCodename
+        -   ArchitectureType guestOsArch
+        -   OsType  guestOsType
+        -   guestOsKernelVersion
+        -   guestOsTimezoneName
+        -   List<GuestContainer> guestContainers
+    -   VmStatistics
+    -   VmPayload
+    -   List<Snapshot> snapshots
+    -   InitializationType
+    -   Map<VmDeviceId, Map<String,String>> runtimeDeviceCustomProperties
+    -   ArchitectureType clusterArch
+    -   Set<String> nextRunChangedFields
+    -   boolean nextRunConfigurationExists
+    -   boolean previewSnapshot
+    -   LockInfo lockInfo
+    -   int backgroundOperationProgress
+    -   String backgroundOperationDescription
+    -   Map<Guid, Disk> diskMap
+
+# 操作
+
+以engine中的command为入口
+
+
+engine | vdsm | libvirt | desc
+---|---|---|---
+Hibernate | hibernate -> save | virDomainSave | 
+挂起虚拟机并把它内存以文件的方式存储到磁盘中。成功后这个vm就不是running list中的，使用virDomainResotre来恢复。
+Pause | pase -> suspend | virDomainSuspend |  
+一个运行的虚拟机会被冻结，没有权利去访问cpu\io资源，但是内存还是会在hypervisor层分配，可以使用virDomainResume来重新激活vm。
+

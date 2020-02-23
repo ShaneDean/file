@@ -1,0 +1,1 @@
+[解决AsyncTask引发的RejectedExecutionException](https://www.cnblogs.com/fotransit/archive/2013/04/17/3025937.html)

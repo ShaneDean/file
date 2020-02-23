@@ -1,0 +1,2 @@
+# 前言
+由于gwt是Java写的，它将Java代码变成前台页面的时候需要很多个步骤，比如编译、压缩、混淆等，不利于断点调试；而且engine中的webadmin部分使用的rpc调用，直接打开chrome dev tools 的networks是看不出有效信息的；整个前台的开发页面国产都需要make clean install-dev ，等待时间超级长，开发效率超级低。然后就有了super dev mode 模式，详细描述参见gwt官网，本文参考 [oVirt Webadmin GWT Debug Quick Refresh](https://www.ovirt.org/blog/2017/08/ovirt-webadmin-gwt-debug-quick-refresh/)来开启ovirt-engine的super-dev-mode.
