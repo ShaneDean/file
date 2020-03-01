@@ -86,5 +86,34 @@
     - @DurationUnit  时间转换
     - @DataSizeUnit  数据大小转换
     - 验证（@ConfigurationProperties  + @Validated） (JSR-303)
-  - profile
+  - profiles
+    - **spring.profiles.active** 
+  - logging  
+    - --debug / application.properties:debug = true 
+    - --trace /  application.properties:trace = true 
+    - color : spring.output.ansi.enabled = 
+    - file output: logging.file.name/logging.file.path
+      - logging.file.max-size: default 10MB
+      - logging.file.max-history : default 7 days
+      - total size : logging.file.total-size-cap
+      - clean history log : logging.file.clean-history-on-start
+    - levels: 分别定义root logger和 其他的logger
+    - group : 不同的logger 定义成一个logging.group.xxx
+      - 预定义 group
+        - web
+        - sql
+    - cumstomization : loging.config
+      - logback
+      - log4j2
+      - jdk
+    - logback extensions 
+      - profile  :  \<springProfile\>
+      - environment properties: \<springProperty\>
+  - 国际化 ： spring.messages.
+  - json  : 支持 Gson / Jackson / JSON-B
+  - web
+    - spring mvc
+      - 
+
+
 
