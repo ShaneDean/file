@@ -113,7 +113,38 @@
   - json  : 支持 Gson / Jackson / JSON-B
   - web
     - spring mvc
-      - 
-
-
-
+      - HttpMessageConverters
+      - JSON Serializers / Deserializers : default Jackson
+        - @JsonComponent
+        - @MesssageCodeResolver :error codes => errors message
+        - static content
+          - ResourceHttpRequestHandler
+          - (default)spring.mvc.static-path-pattern=/**
+          - spring.resources.static-locations
+          - version agnostic
+          - cache busting
+        - welcome page : index.html
+        - custom favicon : favicon.icon
+        - negotiation
+          - spring.mvc.contentnegotiation.favor-parameter
+          - spring.mvc.contentnegotiation.parameter-name
+          - (additional file extensions) spring.mvc.contentnegotiation.media-types.markdown=text/markdown
+        - TemplateEngines
+          - FreeMarker / Groovy / Thymeleaf / Mustache
+          - (default) **src/main/resources/templates**
+        - Error handling
+          - @ControllerAdvice
+          - (error page)ErrorViewResolver : /resources/error/[error-code].[template]
+            - FilterRegistrationBean  register **ERROR**
+        - HATEOAS
+          - @EnableHypermediaSupport 
+            - LinkDiscoverers
+            - ObjectMapper
+        - CORS (Cross-origin resource sharing)
+          -  WebMvcConfigurer:  CorsRegistry.addCorsMappings(CorsRegistry)
+      - WebFlux : 略
+      - JAX-RS and Jersey
+        - include : **spring-boot-starter-jersey** dependency
+        - extends **ResourceConfig** and register all endpoints
+      - enbedded servlet container
+        - support: Tomcat / Jetty / Undertow
