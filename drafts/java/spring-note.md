@@ -262,3 +262,74 @@
 
 - [more](https://docs.spring.io/spring-boot/docs/2.2.5.RELEASE/reference/htmlsingle/#appendix)
 
+
+
+## spring core
+
+- ioc
+
+  - bean scope
+
+    - singleton
+      - default
+      - 1
+    - prototype 
+      - n
+    - request
+      - each http request
+      - **@RequestScope**
+    - session
+      - each Session of HTP
+      - **@SessionScope** 
+    - application
+      - each ServletContext
+      - **@ApplicationScope** 
+    - websocket
+      - each WebSocket
+
+  - apo:scoped-proxy ： short-lifestyle in long-lifestyle
+
+    - CGLIB-based proxy (default)
+    - JDK interface-based : <**apo:scoped-proxy** **proxy-target-class**=false />
+      - 需要定义interface 并实现
+      - property ref = interface
+    - custom scope
+      - implement  **org.springframework.beans.factory.config.Scope** interface
+
+  - Customizing
+
+    - **lifecycle** interface
+- Aware interface
+    
+- annotation-based configuration
+  
+    - annotation
+      - @required	指定必须提供，避免Null指针异常
+      - @Autowired / @Inject  
+        - 支持 BeanFactory, ApplicationContext, Environment, ResourceLoader, ApplicationEventPublisher,  MessageSource
+        - 支持 @Nullable / Optional
+      - @Primary
+      - @Qualifiers
+        - 默认值 ： bean name
+        - @Resource
+      - @Value
+        - @PropertySource("classpath:application.properties")
+      - @Conditional
+  
+  - MessageSource
+  
+  - Event
+  
+    - 内置
+      - ContextRefreshedEvent
+      - ContextStartedEvent
+      - ContextStoppedEvent
+      - ContextClosedEvent
+      - RequestHandledEvent
+      - ServletRequestHandledEvent
+    - @EventListener
+    - @Async
+  
+    
+  
+  
