@@ -6,4 +6,7 @@
 
 [gdb-online-docs](https://sourceware.org/gdb/onlinedocs/gdb/)
 
-[ui](https://github.com/snare/voltron)
+[ui1](https://github.com/snare/voltron) 
+
+[ui2](https://github.com/cyrus-and/gdb-dashboard)
+
