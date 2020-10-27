@@ -658,9 +658,3 @@ mvn archetype:generate \
   -DartifactId=myproject
 ```
 
-运行
-
-```bash
-cd myproject
-./run.sh
-```
